@@ -1,1 +1,1 @@
-# RsAuthAdmin
+# rs-auth Admin
