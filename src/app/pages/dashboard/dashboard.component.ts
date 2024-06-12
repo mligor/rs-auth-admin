@@ -1,11 +1,28 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {
+  RSAuthTopic,
+  TopicSelectorComponent,
+} from '../../rsauth-ui-components/topic-selector/topic-selector.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
+  imports: [TopicSelectorComponent],
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  topics: RSAuthTopic[] = [
+    {
+      title: 'Clients / Applications',
+      description: 'View and manage all registered clients and applications authorized to access the OAuth2 server.',
+      route: '/clients',
+    },
+    {
+      title: 'User Pools',
+      description:
+        'View and manage all user pools, including user accounts, authentication settings, and security configurations',
+      route: '/user-pools',
+    },
+  ];
+}

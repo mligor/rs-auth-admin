@@ -3,5 +3,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cmake.configureOnOpen": false,
   "eslint.lintTask.enable": true,
-  "cSpell.words": []
+  "cSpell.words": [
+    "rsauth"
+  ]
 }
