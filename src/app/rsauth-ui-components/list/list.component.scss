@@ -1,0 +1,11 @@
+:host {
+  background-color: var(--bs-secondary-bg-subtle);
+  padding: 0.5rem 1rem;
+  overflow-y: auto;
+}
+
+.content-wrapper {
+  .list-item:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}

@@ -1,0 +1,17 @@
+.side-list {
+  min-width: 15rem;
+  width: 15rem;
+}
+
+:host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+}
+
+.content {
+  overflow-y: auto;
+}

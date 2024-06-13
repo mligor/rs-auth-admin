@@ -1,1 +1,16 @@
-<p>user-pools works!</p>
+<div class="d-flex content-wrapper align-items-stretch flex-fill">
+  <rsauth-list class="side-list" [items]="userPools" title="User Pools" [(selectedItem)]="selectedPool" queryParamKey="user-pool" [loading]="loadingUserPools"></rsauth-list>
+
+  @if (selectedPool) {
+    <div class="content flex-fill p-4">
+      <h3>{{ selectedPool.name }}</h3>
+      <p>
+        {{ selectedPool | json }}
+      </p>
+    </div>
+  } @else {
+    <div class="content flex-fill p-4 d-flex justify-content-center align-items-center">
+      <div>Please select User Pool</div>
+    </div>
+  }
+</div>

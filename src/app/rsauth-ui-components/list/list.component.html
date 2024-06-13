@@ -1,0 +1,17 @@
+<div class="d-flex flex-column content-wrapper align-items-stretch">
+  <div class="h5 p-2 text-secondary">{{ title() }}</div>
+
+  @if (loading()) {
+    <div class="d-flex justify-content-center mt-4">
+      <div class="spinner-grow text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  } @else {
+    @for (item of items(); track $index) {
+      <div class="card btn btn-outline-primary text-start list-item" [class]="{ active: $index == selectedIndex() }" (click)="selectItem($index, item)">
+        {{ item.name }}
+      </div>
+    }
+  }
+</div>
