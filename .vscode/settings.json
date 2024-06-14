@@ -4,6 +4,7 @@
   "cmake.configureOnOpen": false,
   "eslint.lintTask.enable": true,
   "cSpell.words": [
-    "rsauth"
+    "rsauth",
+    "zimco"
   ]
 }

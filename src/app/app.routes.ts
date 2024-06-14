@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { ClientsComponent } from './pages/clients/clients.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { UserPoolsComponent } from './pages/user-pools/user-pools.component';
+import { UserPoolsComponent } from './pages/user-pools/user-pools.page';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },

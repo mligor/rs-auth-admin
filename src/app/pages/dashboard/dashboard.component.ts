@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import {
   RSAuthTopic,
-  TopicSelectorComponent,
-} from '../../rsauth-ui-components/topic-selector/topic-selector.component';
+  ZimCoTopicSelectorComponent,
+} from '../../zimco-ui-components/topic-selector/topic-selector.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
-  imports: [TopicSelectorComponent],
+  imports: [ZimCoTopicSelectorComponent],
 })
 export class DashboardComponent {
   topics: RSAuthTopic[] = [

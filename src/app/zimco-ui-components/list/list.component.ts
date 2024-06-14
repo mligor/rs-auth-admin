@@ -1,18 +1,18 @@
 import { AfterContentInit, ChangeDetectorRef, Component, effect, inject, input, model } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-interface HasName {
+export interface HasName {
   name: string;
 }
 
 @Component({
-  selector: 'rsauth-list',
+  selector: 'zimco-list',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent<T extends HasName> implements AfterContentInit {
+export class ZimCoListComponent<T extends HasName> implements AfterContentInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private cdr = inject(ChangeDetectorRef);

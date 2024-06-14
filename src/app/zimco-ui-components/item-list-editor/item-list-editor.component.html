@@ -1,0 +1,15 @@
+<div class="d-flex content-wrapper align-items-stretch flex-fill">
+  <zimco-list class="side-list" [items]="items" [title]="title()" (selectedItemChange)="selectItem($event)" [queryParamKey]="queryParamKey()" [loading]="loading"></zimco-list>
+
+  @if (template) {
+    @if (selectedItem) {
+      <ng-template *ngTemplateOutlet="template; context: { $item: selectedItem }"></ng-template>
+    } @else {
+      <div class="content flex-fill p-4 d-flex justify-content-center align-items-center">
+        <div>Please select Item</div>
+      </div>
+    }
+  } @else {
+    NO_TEMPLATE
+  }
+</div>

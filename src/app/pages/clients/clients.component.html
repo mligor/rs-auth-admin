@@ -1,1 +1,3 @@
-<p>clients works!</p>
+<zimco-item-list-editor title="Auth Clients" [loader]="service" queryParamKey="auth-client">
+  <auth-client *rsauthItem="let client = $item" [authClient]="client"></auth-client>
+</zimco-item-list-editor>

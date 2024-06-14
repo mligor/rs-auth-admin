@@ -9,12 +9,12 @@ export interface RSAuthTopic {
 }
 
 @Component({
-  selector: 'rsauth-topic-selector',
+  selector: 'zimco-topic-selector',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './topic-selector.component.html',
   styleUrl: './topic-selector.component.scss',
 })
-export class TopicSelectorComponent {
+export class ZimCoTopicSelectorComponent {
   topics = input.required<RSAuthTopic[]>();
 }
