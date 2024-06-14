@@ -1,5 +1,12 @@
 <div class="d-flex content-wrapper align-items-stretch flex-fill">
-  <zimco-list class="side-list" [items]="items" [title]="title()" (selectedItemChange)="selectItem($event)" [queryParamKey]="queryParamKey()" [loading]="loading"></zimco-list>
+  <zimco-list
+    class="side-list zimco-list-animated-selection"
+    [items]="items"
+    [title]="title()"
+    (selectedItemChange)="selectItem($event)"
+    [queryParamKey]="queryParamKey()"
+    [loading]="loading"
+  ></zimco-list>
 
   @if (template) {
     @if (selectedItem) {

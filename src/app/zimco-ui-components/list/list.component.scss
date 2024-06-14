@@ -5,7 +5,20 @@
 }
 
 .content-wrapper {
+  .list-item {
+    transition: all 0.2s ease-out;
+  }
+
   .list-item:not(:last-child) {
     margin-bottom: 0.5rem;
+  }
+}
+
+:host.zimco-list-animated-selection {
+  .list-item:active,
+  .list-item.active {
+    transform: translate(1rem);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
