@@ -1,7 +1,7 @@
 <button
   type="button"
-  class="btn btn-sm btn-outline-primary text-start d-flex align-items-center flex-fill content-wrapper"
-  [class]="[color() ? 'btn-outline-' + color() : '', small() ? 'small' : '']"
+  class="btn btn-sm btn-outline-primary d-flex align-items-center flex-fill content-wrapper"
+  [class]="[color() ? 'btn-outline-' + color() : '', 'zim-button-' + size(), hostClasses]"
   [disabled]="disabled()"
 >
   @if (icon()) {
@@ -9,5 +9,5 @@
       <i class="bi bi-{{ icon() }}"></i>
     </div>
   }
-  <span class="flex-fill button-text"><ng-content></ng-content></span>
+  <span class="flex-fill button-text" [class]="!icon() ? 'no-icon' : ''"><ng-content></ng-content></span>
 </button>

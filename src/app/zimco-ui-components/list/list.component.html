@@ -12,7 +12,7 @@
   } @else {
     @for (item of items(); track $index) {
       <div class="card btn btn-outline-primary text-start list-item" [class]="{ active: $index == selectedIndex() }" (click)="selectItem($index, item)">
-        {{ item.name }}
+        {{ item.name ? item.name : '&nbsp;' }}
       </div>
     } @empty {
       <ng-content select="[no-items]"></ng-content>

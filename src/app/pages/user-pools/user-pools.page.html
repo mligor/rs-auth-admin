@@ -1,8 +1,24 @@
 <zimco-item-list-editor title="User Pools" [loader]="service" queryParamKey="user-pool" [createItemFn]="createUserPool.bind(this)">
   <user-pool *zimcoListItem="let pool=$item" [userPool]="pool"></user-pool>
   <div *zimcoListNoItems class="d-flex flex-column no-items-buttons">
-    <zimco-button icon="people">Crate User Pool</zimco-button>
-    <zimco-button icon="people">Second button with some longer text that can not fit in single line</zimco-button>
-    <zimco-button icon="trash" color="danger" disabled>One button without icon and very long text that should be in multiple lines</zimco-button>
+    <zimco-button size="lg" icon="people" class="text-start" (click)="showText('create user pool')">Create User Pool</zimco-button>
+    <zimco-button size="lg" icon="people" class="text-start" (click)="showText('second button')">Second button with some longer text that can not fit in single line</zimco-button>
+    <zimco-button size="lg" icon="trash" color="danger" class="text-start" disabled (click)="showText('disabled button')"
+      >One button without icon and very long text that should be in multiple lines</zimco-button
+    >
   </div>
 </zimco-item-list-editor>
+
+<ng-template #createPoolDlg let-dialog>
+  <div class="modal-header h3">Create new User Pool</div>
+  <div class="modal-body">
+    <div>
+      <span>User Pool Name:</span>
+      <input type="text" class="form-control mt-2" [(ngModel)]="dialog.data.name" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <zimco-button (click)="dialog.dismiss('cancel')" class="text-center">Cancel</zimco-button>
+    <zimco-button (click)="dialog.close('ok')" class="text-center" [disabled]="!dialog.data.name">Ok</zimco-button>
+  </div>
+</ng-template>

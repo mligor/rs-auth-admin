@@ -38,7 +38,7 @@ export class ZimCoItemListEditorComponent<TInfo extends HasName, T> implements O
   queryParamKey = input<string>();
   title = input<string>();
   loader = input<ItemLoader<TInfo, T>>();
-  createItemFn = input<CreateItemFn<T>>();
+  createItemFn = input<CreateItemFn<T | null>>();
 
   template: TemplateRef<any> | null = null;
   noItemsTemplate: TemplateRef<any> | null = null;
@@ -67,8 +67,9 @@ export class ZimCoItemListEditorComponent<TInfo extends HasName, T> implements O
     const f = this.createItemFn();
     if (f) {
       const newItem = await f();
-      const loader = this.loader();
+      if (newItem === null) return;
 
+      const loader = this.loader();
       if (loader) {
         await firstValueFrom(loader.add(newItem));
         const infoItem = <TInfo>(<any>newItem);

@@ -16,7 +16,7 @@
     <ng-container header-buttons>
       <ng-content select="[header-buttons]"></ng-content>
       @if (createItemFn()) {
-        <zimco-button icon="plus" small (click)="createItem()">Add</zimco-button>
+        <zimco-button icon="plus" size="sm" (click)="createItem()">Add</zimco-button>
       }
     </ng-container>
   </zimco-list>

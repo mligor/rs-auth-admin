@@ -27,4 +27,8 @@ export class DashboardComponent {
       icon: 'people',
     },
   ];
+
+  showAlert(text: string) {
+    alert(text);
+  }
 }
