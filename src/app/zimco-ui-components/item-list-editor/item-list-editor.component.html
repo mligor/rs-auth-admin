@@ -1,12 +1,25 @@
 <div class="d-flex content-wrapper align-items-stretch flex-fill">
   <zimco-list
-    class="side-list zimco-list-animated-selection"
+    #listComponent
+    class="side-list"
     [items]="items"
     [title]="title()"
-    (selectedItemChange)="selectItem($event)"
+    (selectedItemChange)="onSelectionChange($event)"
     [queryParamKey]="queryParamKey()"
     [loading]="loading"
-  ></zimco-list>
+  >
+    @if (noItemsTemplate) {
+      <div no-items class="no-items m-2">
+        <ng-template *ngTemplateOutlet="noItemsTemplate"></ng-template>
+      </div>
+    }
+    <ng-container header-buttons>
+      <ng-content select="[header-buttons]"></ng-content>
+      @if (createItemFn()) {
+        <zimco-button icon="plus" small (click)="createItem()">Add</zimco-button>
+      }
+    </ng-container>
+  </zimco-list>
 
   @if (template) {
     @if (selectedItem) {

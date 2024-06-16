@@ -4,7 +4,9 @@
   "cmake.configureOnOpen": false,
   "eslint.lintTask.enable": true,
   "cSpell.words": [
+    "IDBP",
     "rsauth",
+    "uuidv",
     "zimco"
   ]
 }

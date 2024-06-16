@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, delay, map, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { ItemLoader } from '../zimco-ui-components/item-list-editor/item-list-editor.component';
+import { RSAuthDBService } from './rs-auth-db.service';
 
 export interface AuthClient {
   id: string;
@@ -16,44 +18,28 @@ export interface AuthClient {
   providedIn: 'root',
 })
 export class AuthClientService implements ItemLoader<AuthClient, AuthClient> {
-  private clients: AuthClient[] = [
-    {
-      id: '1',
-      name: 'Client 1',
-      clientId: 'client_1',
-      clientSecret: 'secret_1',
-      redirectUris: ['https://client1.example.com/callback'],
-      grantTypes: ['authorization_code', 'refresh_token'],
-      scopes: ['read', 'write'],
-    },
-    {
-      id: '2',
-      name: 'Client 2',
-      clientId: 'client_2',
-      clientSecret: 'secret_2',
-      redirectUris: ['https://client2.example.com/callback'],
-      grantTypes: ['client_credentials'],
-      scopes: ['read'],
-    },
-    {
-      id: '3',
-      name: 'Client 3',
-      clientId: 'client_3',
-      clientSecret: 'secret_3',
-      redirectUris: ['https://client3.example.com/callback'],
-      grantTypes: ['password', 'refresh_token'],
-      scopes: ['read', 'write', 'admin'],
-    },
-  ];
+  private dbService = inject(RSAuthDBService);
 
   get items$(): Observable<AuthClient[]> {
-    return of(this.clients).pipe(delay(500));
+    return from(this.dbService.getAuthClients()).pipe(delay(500));
   }
 
   item$(id: string): Observable<AuthClient | null> {
-    return of(this.clients).pipe(
+    return from(this.dbService.getAuthClient(id)).pipe(
       delay(500),
-      map(clients => clients.find(c => c.id === id) ?? null)
+      map(client => client ?? null)
     );
+  }
+
+  add(authClient: AuthClient): Observable<void> {
+    return from(this.dbService.addAuthClient(authClient));
+  }
+
+  save(authClient: AuthClient): Observable<void> {
+    return from(this.dbService.saveAuthClient(authClient));
+  }
+
+  delete(id: string): Observable<void> {
+    return from(this.dbService.deleteAuthClient(id));
   }
 }

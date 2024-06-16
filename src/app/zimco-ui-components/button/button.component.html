@@ -1,0 +1,13 @@
+<button
+  type="button"
+  class="btn btn-sm btn-outline-primary text-start d-flex align-items-center flex-fill content-wrapper"
+  [class]="[color() ? 'btn-outline-' + color() : '', small() ? 'small' : '']"
+  [disabled]="disabled()"
+>
+  @if (icon()) {
+    <div class="button-icon">
+      <i class="bi bi-{{ icon() }}"></i>
+    </div>
+  }
+  <span class="flex-fill button-text"><ng-content></ng-content></span>
+</button>

@@ -1,3 +1,8 @@
-<zimco-item-list-editor title="User Pools" [loader]="service" queryParamKey="user-pool">
-  <user-pool *rsauthItem="let pool=$item" [userPool]="pool"></user-pool>
+<zimco-item-list-editor title="User Pools" [loader]="service" queryParamKey="user-pool" [createItemFn]="createUserPool.bind(this)">
+  <user-pool *zimcoListItem="let pool=$item" [userPool]="pool"></user-pool>
+  <div *zimcoListNoItems class="d-flex flex-column no-items-buttons">
+    <zimco-button icon="people">Crate User Pool</zimco-button>
+    <zimco-button icon="people">Second button with some longer text that can not fit in single line</zimco-button>
+    <zimco-button icon="trash" color="danger" disabled>One button without icon and very long text that should be in multiple lines</zimco-button>
+  </div>
 </zimco-item-list-editor>

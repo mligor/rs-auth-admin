@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, delay, map, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { ItemLoader } from '../zimco-ui-components/item-list-editor/item-list-editor.component';
+import { RSAuthDBService } from './rs-auth-db.service';
 
 export interface UserPool {
   id: string;
@@ -11,20 +13,28 @@ export interface UserPool {
   providedIn: 'root',
 })
 export class UserPoolService implements ItemLoader<UserPool, UserPool> {
-  private userPools: UserPool[] = [
-    { id: '1', name: 'User Pool 1' },
-    { id: '2', name: 'User Pool 2' },
-    { id: '3', name: 'User Pool 3' },
-  ];
+  private dbService = inject(RSAuthDBService);
 
   get items$(): Observable<UserPool[]> {
-    return of(this.userPools).pipe(delay(500));
+    return from(this.dbService.getUserPools()).pipe(delay(500));
   }
 
   item$(id: string): Observable<UserPool | null> {
-    return of(this.userPools).pipe(
+    return from(this.dbService.getUserPool(id)).pipe(
       delay(500),
-      map(pools => pools.find(pool => pool.id === id) ?? null)
+      map(userPool => userPool ?? null)
     );
+  }
+
+  add(userPool: UserPool): Observable<void> {
+    return from(this.dbService.addUserPool(userPool));
+  }
+
+  save(userPool: UserPool): Observable<void> {
+    return from(this.dbService.saveUserPool(userPool));
+  }
+
+  delete(id: string): Observable<void> {
+    return from(this.dbService.deleteUserPool(id));
   }
 }

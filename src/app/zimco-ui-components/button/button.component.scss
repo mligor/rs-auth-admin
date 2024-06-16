@@ -1,0 +1,43 @@
+:host {
+  display: inline-flex;
+}
+
+.button-icon {
+  font-size: 1.5rem;
+}
+
+.button-text {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  &:empty {
+    display: none;
+  }
+}
+
+.content-wrapper {
+  gap: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  &.small {
+    gap: 0.125rem;
+    padding: 0;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
+    .button-icon {
+      font-size: 1rem;
+      line-height: 1rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+    .button-text {
+      margin: 0;
+      line-height: 1rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+  }
+}
