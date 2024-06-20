@@ -24,3 +24,11 @@ $primary: #6f42c1; // purple
     background-color: rgba(var(--bs-primary-rgb), 50%);
   }
 }
+
+.absolute-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}

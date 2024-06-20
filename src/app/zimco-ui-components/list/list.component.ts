@@ -1,10 +1,6 @@
 import { AfterContentInit, ChangeDetectorRef, Component, effect, inject, input, model } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-export interface HasName {
-  name: string;
-}
-
 @Component({
   selector: 'zimco-list',
   standalone: true,
@@ -12,19 +8,25 @@ export interface HasName {
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ZimCoListComponent<T extends HasName> implements AfterContentInit {
+export class ZimCoListComponent<T> implements AfterContentInit {
+  // Services
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private cdr = inject(ChangeDetectorRef);
 
-  items = input.required<T[]>();
-  title = input<string>();
+  // Models
   selectedIndex = model<number>(-1);
   selectedItem = model<T>();
-  queryParamKey = input<string>();
+
+  // Inputs
+  items = input.required<T[]>();
+  title = input<string>();
+  trackSelection = input<string>();
   canDeselect = input<boolean>(true);
   loading = input<boolean>(false);
-  lastQueryParamIndex = -1;
+
+  // Properties
+  private lastQueryParamIndex = -1;
 
   constructor() {
     // Register a new effect.
@@ -40,7 +42,7 @@ export class ZimCoListComponent<T extends HasName> implements AfterContentInit {
   }
 
   ngAfterContentInit() {
-    const key = this.queryParamKey();
+    const key = this.trackSelection();
     if (key) {
       this.route.queryParams.subscribe(params => {
         const index = +params[key];
@@ -65,11 +67,15 @@ export class ZimCoListComponent<T extends HasName> implements AfterContentInit {
     }
   }
 
+  protected getItemLabel(item: T): string {
+    return <string>item;
+  }
+
   selectItem(index: number, item: T) {
     if (this.selectedIndex() === index && this.canDeselect()) {
       this.selectedIndex.set(-1);
       this.selectedItem.set(undefined);
-      const key = this.queryParamKey();
+      const key = this.trackSelection();
       if (key) {
         this.router.navigate([], {
           queryParams: { [key]: null },
@@ -80,7 +86,7 @@ export class ZimCoListComponent<T extends HasName> implements AfterContentInit {
     } else {
       this.selectedIndex.set(index);
       this.selectedItem.set(item);
-      const key = this.queryParamKey();
+      const key = this.trackSelection();
       if (key) {
         this.router.navigate([], {
           queryParams: { [key]: index },

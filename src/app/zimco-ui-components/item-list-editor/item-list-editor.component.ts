@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { AfterContentInit, Component, Directive, NgModule, OnInit, TemplateRef, input, viewChild } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
 import { ZimCoButtonComponent } from '../button/button.component';
-import { HasName, ZimCoListComponent } from '../list/list.component';
+import { ZimCoListComponent } from '../list/list.component';
 
 export interface ItemLoader<TInfo, T> {
   get items$(): Observable<TInfo[]>;
@@ -15,14 +15,14 @@ export interface ItemLoader<TInfo, T> {
 export type CreateItemFn<T> = () => Promise<T>;
 
 @Directive({ selector: '[zimcoListItem]', standalone: false })
-export class ZimCoItemEditorDirective<TInfo extends HasName, T> {
+export class ZimCoItemEditorDirective<TInfo, T> {
   constructor(itemListEditorComponent: ZimCoItemListEditorComponent<TInfo, T>, template: TemplateRef<any>) {
     itemListEditorComponent.template = template;
   }
 }
 
 @Directive({ selector: '[zimcoListNoItems]', standalone: false })
-export class ZimCoNoItemsEditorDirective<TInfo extends HasName, T> {
+export class ZimCoNoItemsEditorDirective<TInfo, T> {
   constructor(itemListEditorComponent: ZimCoItemListEditorComponent<TInfo, T>, template: TemplateRef<any>) {
     itemListEditorComponent.noItemsTemplate = template;
   }
@@ -34,8 +34,8 @@ export class ZimCoNoItemsEditorDirective<TInfo extends HasName, T> {
   templateUrl: './item-list-editor.component.html',
   styleUrl: './item-list-editor.component.scss',
 })
-export class ZimCoItemListEditorComponent<TInfo extends HasName, T> implements OnInit, AfterContentInit {
-  queryParamKey = input<string>();
+export class ZimCoItemListEditorComponent<TInfo, T> implements OnInit, AfterContentInit {
+  trackSelection = input<string>();
   title = input<string>();
   loader = input<ItemLoader<TInfo, T>>();
   createItemFn = input<CreateItemFn<T | null>>();

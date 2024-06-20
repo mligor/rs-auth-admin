@@ -1,21 +1,23 @@
-<div class="d-flex flex-column content-wrapper align-items-stretch">
+<div class="d-flex flex-column content-wrapper align-items-stretch p-3">
   <div class="header d-flex align-items-center mb-2">
     <div class="h5 m-0 text-secondary flex-fill">{{ title() }}</div>
-    <ng-content select="[header-buttons]"></ng-content>
+    <ng-content select="[zimco-list-header]"></ng-content>
   </div>
-  @if (loading()) {
-    <div class="d-flex justify-content-center mt-4">
-      <div class="spinner-grow text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
+  <div class="items px-1">
+    @if (loading()) {
+      <div class="d-flex justify-content-center mt-4">
+        <div class="spinner-grow text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
-    </div>
-  } @else {
-    @for (item of items(); track $index) {
-      <div class="card btn btn-outline-primary text-start list-item" [class]="{ active: $index == selectedIndex() }" (click)="selectItem($index, item)">
-        {{ item.name ? item.name : '&nbsp;' }}
-      </div>
-    } @empty {
-      <ng-content select="[no-items]"></ng-content>
+    } @else {
+      @for (item of items(); track $index) {
+        <div class="card btn btn-outline-primary text-start list-item" [class]="{ active: $index == selectedIndex() }" (click)="selectItem($index, item)">
+          {{ getItemLabel(item) || '&nbsp;' }}
+        </div>
+      } @empty {
+        <ng-content select="[no-items]"></ng-content>
+      }
     }
-  }
+  </div>
 </div>

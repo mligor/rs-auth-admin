@@ -1,0 +1,101 @@
+<div class="absolute-fill d-flex">
+  <div [style.width]="'20rem'" class="position-relative">
+    <zimco-list class="absolute-fill" title="UI Components" [items]="items" [(selectedIndex)]="selectedItem" trackSelection="component"></zimco-list>
+  </div>
+  <div class="flex-fill position-relative">
+    <div class="absolute-fill p-4 overflow-auto">
+      @switch (items[selectedItem]) {
+        @case ('zimco-button') {
+          <div>
+            <h1>zimco-button</h1>
+            <div>
+              <div class="h5">Standard button</div>
+              <zimco-button class="m-1">Click Me</zimco-button>
+              <pre class="code-block">&lt;zimco-button&gt;Click Me&lt;/zimco-button&gt;</pre>
+            </div>
+            <div>
+              <div class="h5">Colors</div>
+              <zimco-button color="danger" class="m-1">Danger</zimco-button>
+              <zimco-button color="success" class="m-1">Success</zimco-button>
+
+              <pre class="code-block">
+&lt;zimco-button color=&quot;danger&quot;&gt;Danger&lt;/zimco-button&gt;
+&lt;zimco-button color=&quot;success&quot;&gt;Success&lt;/zimco-button&gt;</pre
+              >
+            </div>
+            <div>
+              <div class="h5">Sizes</div>
+              <zimco-button class="m-1" size="normal">Normal</zimco-button>
+              <zimco-button class="m-1" size="lg">Large</zimco-button>
+              <zimco-button class="m-1" size="sm">Small</zimco-button>
+
+              <pre class="code-block">
+&lt;zimco-button size=&quot;normal&quot;&gt;Normal&lt;/zimco-button&gt;
+&lt;zimco-button size=&quot;large&quot;&gt;Large&lt;/zimco-button&gt;
+&lt;zimco-button size=&quot;small&quot;&gt;Small&lt;/zimco-button&gt;</pre
+              >
+            </div>
+            <div>
+              <div class="h5">Icons</div>
+              <zimco-button icon="x-circle" class="m-1">Stop</zimco-button>
+              <zimco-button icon="star" class="m-1">Favorite</zimco-button>
+
+              <pre class="code-block">
+&lt;zimco-button icon=&quot;x-circle&quot;&gt;Stop&lt;/zimco-button&gt;
+&lt;zimco-button icon=&quot;star&quot;&gt;Favorite&lt;/zimco-button&gt;</pre
+              >
+            </div>
+          </div>
+        }
+        @case ('zimco-list') {
+          <div>
+            <h1>zimco-list</h1>
+            <div>
+              <div class="h5">Standard List</div>
+              <zimco-list [items]="testItems" title="My List"></zimco-list>
+            </div>
+            <div>
+              <div class="h5">In Fixed Container</div>
+              <div [style.width]="'200px'" [style.height]="'200px'" class="border-1 border border-warning position-relative">
+                <zimco-list [items]="testItems" title="My List" class="absolute-fill"></zimco-list>
+              </div>
+            </div>
+
+            <div>
+              <div class="h5">With extra header</div>
+              <zimco-list [items]="testItems" title="My List">
+                <ng-content zimco-list-header>This is header <zimco-button size="sm">Add Item</zimco-button></ng-content>
+              </zimco-list>
+            </div>
+
+            <div>
+              <div class="h5">Track selection</div>
+              <zimco-list [items]="testItems" title="My List" trackSelection="my-list"> </zimco-list>
+            </div>
+          </div>
+        }
+        @case ('zimco-dialog') {
+          <div>
+            <h1>zimco-dialog</h1>
+            <div>
+              <div class="h5">Prompt Dialog</div>
+              <zimco-button (click)="openPromptDialog()">Enter your name</zimco-button>
+              <div>Result : '{{ promptDialogResult }}'</div>
+
+              <pre class="code-block">
+protected zimcoDialog = inject(ZimCoDialog);
+protected promptDialogResult?: string = undefined;
+protected async openPromptDialog() &#123;
+  const res = await this.zimcoDialog.prompt('Name', 'Enter your name', this.promptDialogResult);
+  if (res !== null) &#123;
+    this.promptDialogResult = res;
+  &#125;
+&#125;</pre
+              >
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

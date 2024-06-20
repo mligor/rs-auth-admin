@@ -5,7 +5,7 @@
     [items]="items"
     [title]="title()"
     (selectedItemChange)="onSelectionChange($event)"
-    [queryParamKey]="queryParamKey()"
+    [trackSelection]="trackSelection()"
     [loading]="loading"
   >
     @if (noItemsTemplate) {
@@ -13,8 +13,8 @@
         <ng-template *ngTemplateOutlet="noItemsTemplate"></ng-template>
       </div>
     }
-    <ng-container header-buttons>
-      <ng-content select="[header-buttons]"></ng-content>
+    <ng-container zimco-list-header>
+      <ng-content select="[zimco-list-header]"></ng-content>
       @if (createItemFn()) {
         <zimco-button icon="plus" size="sm" (click)="createItem()">Add</zimco-button>
       }
