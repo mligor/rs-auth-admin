@@ -1,0 +1,11 @@
+<div class="modal-header h3">{{ title }}</div>
+<div class="modal-body">
+  <div>
+    <span>{{ promptText }}</span>
+    <input type="text" class="form-control mt-2" [(ngModel)]="data.text" />
+  </div>
+</div>
+<div class="modal-footer">
+  <zimco-button (click)="activeModal.dismiss('cancel')" class="text-center">Cancel</zimco-button>
+  <zimco-button (click)="activeModal.close('ok')" class="text-center" [disabled]="!data.text">Ok</zimco-button>
+</div>

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { UserPoolComponent } from '../../components/user-pool/user-pool.component';
 import { UserPool, UserPoolService } from '../../services/user-pool.service';
 import { ZimCoButtonComponent } from '../../zimco-ui-components/button/button.component';
-import { ZimCoDialog } from '../../zimco-ui-components/dialog.service';
+import { ZimCoDialog } from '../../zimco-ui-components/dialog/dialog.service';
 import { ItemListEditorModule } from '../../zimco-ui-components/item-list-editor/item-list-editor.component';
 
 @Component({
@@ -20,12 +20,22 @@ export class UserPoolsComponent {
 
   createPoolDlg = viewChild.required<TemplateRef<any>>('createPoolDlg');
 
-  async createUserPool(): Promise<UserPool | null> {
+  async createUserPool2(): Promise<UserPool | null> {
     try {
       const data: { name: string } = { name: '' };
       const res = await this.dialog.show(this.createPoolDlg(), data, { backdrop: 'static' });
       if (!res) return null;
       return { id: uuidv4(), name: data.name };
+    } catch (error) {
+      return null; // Cancel
+    }
+  }
+
+  async createUserPool(): Promise<UserPool | null> {
+    try {
+      const res = await this.dialog.prompt('Create new User Pool', 'User Pool Name:', 'my-pool');
+      if (!res) return null;
+      return { id: uuidv4(), name: res };
     } catch (error) {
       return null; // Cancel
     }
