@@ -1,6 +1,11 @@
 <div class="d-flex flex-wrap">
   @for (topic of topics(); track $index) {
-    <div class="card btn btn-outline-primary m-3 flex-fill" style="width: 18rem; min-width: 18rem" [routerLink]="topic.route">
+    <div
+      class="card btn btn-outline-primary m-3 flex-fill"
+      style="width: 18rem; min-width: 18rem"
+      [routerLink]="topic.route"
+      [class]="[topic.color ? 'btn-outline-' + topic.color : '']"
+    >
       <div class="card-body d-flex flex-column">
         <div class="d-flex align-items-center">
           <div><i class="bi bi-{{ topic.icon }} display-4 me-4"></i></div>

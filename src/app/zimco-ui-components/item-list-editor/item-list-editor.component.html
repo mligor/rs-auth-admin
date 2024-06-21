@@ -7,6 +7,7 @@
     (selectedItemChange)="onSelectionChange($event)"
     [trackSelection]="trackSelection()"
     [loading]="loading"
+    [getLabelFn]="getLabelFn()"
   >
     @if (noItemsTemplate) {
       <div no-items class="no-items m-2">

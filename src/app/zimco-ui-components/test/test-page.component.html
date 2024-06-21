@@ -15,8 +15,14 @@
             </div>
             <div>
               <div class="h5">Colors</div>
-              <zimco-button color="danger" class="m-1">Danger</zimco-button>
-              <zimco-button color="success" class="m-1">Success</zimco-button>
+              <zimco-button color="primary" class="m-1">primary</zimco-button>
+              <zimco-button color="secondary" class="m-1">secondary</zimco-button>
+              <zimco-button color="success" class="m-1">success</zimco-button>
+              <zimco-button color="info" class="m-1">info</zimco-button>
+              <zimco-button color="warning" class="m-1">warning</zimco-button>
+              <zimco-button color="danger" class="m-1">danger</zimco-button>
+              <zimco-button color="light" class="m-1">light</zimco-button>
+              <zimco-button color="dark" class="m-1">dark</zimco-button>
 
               <pre class="code-block">
 &lt;zimco-button color=&quot;danger&quot;&gt;Danger&lt;/zimco-button&gt;
@@ -71,6 +77,15 @@
             <div>
               <div class="h5">Track selection</div>
               <zimco-list [items]="testItems" title="My List" trackSelection="my-list"> </zimco-list>
+            </div>
+          </div>
+        }
+        @case ('zimco-topic-selector') {
+          <div>
+            <h1>topic-selector</h1>
+            <div>
+              <div class="h5">Standard List</div>
+              <zimco-topic-selector [topics]="testTopics"></zimco-topic-selector>
             </div>
           </div>
         }

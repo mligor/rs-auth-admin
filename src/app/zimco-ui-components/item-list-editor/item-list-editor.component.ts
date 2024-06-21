@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { AfterContentInit, Component, Directive, NgModule, OnInit, TemplateRef, input, viewChild } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
 import { ZimCoButtonComponent } from '../button/button.component';
-import { ZimCoListComponent } from '../list/list.component';
+import { ZimCoListComponent, ZimCoListGetLabelFn } from '../list/list.component';
 
 export interface ItemLoader<TInfo, T> {
   get items$(): Observable<TInfo[]>;
@@ -12,7 +12,7 @@ export interface ItemLoader<TInfo, T> {
   delete(id: string): Observable<void>;
 }
 
-export type CreateItemFn<T> = () => Promise<T>;
+export type ZimCoListCreateItemFn<T> = () => Promise<T>;
 
 @Directive({ selector: '[zimcoListItem]', standalone: false })
 export class ZimCoItemEditorDirective<TInfo, T> {
@@ -38,7 +38,8 @@ export class ZimCoItemListEditorComponent<TInfo, T> implements OnInit, AfterCont
   trackSelection = input<string>();
   title = input<string>();
   loader = input<ItemLoader<TInfo, T>>();
-  createItemFn = input<CreateItemFn<T | null>>();
+  createItemFn = input<ZimCoListCreateItemFn<T | null>>();
+  getLabelFn = input<ZimCoListGetLabelFn<TInfo>>();
 
   template: TemplateRef<any> | null = null;
   noItemsTemplate: TemplateRef<any> | null = null;
@@ -60,7 +61,7 @@ export class ZimCoItemListEditorComponent<TInfo, T> implements OnInit, AfterCont
 
   ngAfterContentInit() {}
 
-  onSelectionChange(itemInfo: TInfo) {
+  onSelectionChange(itemInfo: TInfo | undefined) {
     this.selectedItem = <T>(<any>itemInfo);
   }
   async createItem() {

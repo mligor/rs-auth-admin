@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  RSAuthTopic,
+  ZimCoTopicInfo,
   ZimCoTopicSelectorComponent,
 } from '../../zimco-ui-components/topic-selector/topic-selector.component';
 
@@ -12,7 +12,7 @@ import {
   imports: [ZimCoTopicSelectorComponent],
 })
 export class DashboardComponent {
-  topics: RSAuthTopic[] = [
+  topics: ZimCoTopicInfo[] = [
     {
       title: 'Clients / Applications',
       description: 'View and manage all registered clients and applications authorized to access the OAuth2 server.',

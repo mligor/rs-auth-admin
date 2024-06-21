@@ -1,11 +1,12 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-export interface RSAuthTopic {
+export interface ZimCoTopicInfo {
   title?: string;
   description?: string;
   icon?: string;
   route: string;
+  color?: string;
 }
 
 @Component({
@@ -16,5 +17,5 @@ export interface RSAuthTopic {
   styleUrl: './topic-selector.component.scss',
 })
 export class ZimCoTopicSelectorComponent {
-  topics = input.required<RSAuthTopic[]>();
+  topics = input.required<ZimCoTopicInfo[]>();
 }

@@ -1,0 +1,12 @@
+@use 'sass:color';
+
+.card {
+  border-radius: 0;
+  border-width: 2px;
+  border-color: var(--bs-btn-color);
+  &:hover {
+    box-shadow:
+      0 0 10px var(--bs-btn-color),
+      0 0 35px var(--bs-btn-color);
+  }
+}

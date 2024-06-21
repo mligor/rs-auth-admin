@@ -1,6 +1,8 @@
 import { AfterContentInit, ChangeDetectorRef, Component, effect, inject, input, model } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
+export type ZimCoListGetLabelFn<T> = (item: T) => string;
+
 @Component({
   selector: 'zimco-list',
   standalone: true,
@@ -24,6 +26,7 @@ export class ZimCoListComponent<T> implements AfterContentInit {
   trackSelection = input<string>();
   canDeselect = input<boolean>(true);
   loading = input<boolean>(false);
+  getLabelFn = input<ZimCoListGetLabelFn<T>>();
 
   // Properties
   private lastQueryParamIndex = -1;
@@ -68,6 +71,10 @@ export class ZimCoListComponent<T> implements AfterContentInit {
   }
 
   protected getItemLabel(item: T): string {
+    const fn = this.getLabelFn();
+    if (fn) {
+      return fn(item);
+    }
     return <string>item;
   }
 

@@ -1,4 +1,4 @@
-<zimco-item-list-editor title="User Pools" [loader]="service" trackSelection="user-pool" [createItemFn]="createUserPool.bind(this)">
+<zimco-item-list-editor title="User Pools" [loader]="service" trackSelection="user-pool" [createItemFn]="createUserPool.bind(this)" [getLabelFn]="getPoolLabel.bind(this)">
   <user-pool *zimcoListItem="let pool=$item" [userPool]="pool"></user-pool>
   <div *zimcoListNoItems class="d-flex flex-column no-items-buttons">
     <zimco-button size="lg" icon="people" class="text-start" (click)="showText('create user pool')">Create User Pool</zimco-button>

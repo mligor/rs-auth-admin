@@ -41,6 +41,10 @@ export class UserPoolsComponent {
     }
   }
 
+  getPoolLabel(item: UserPool): string {
+    return item.name;
+  }
+
   showText(text: string) {
     console.log('btn-action:', text);
   }
